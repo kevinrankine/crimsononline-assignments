@@ -55,8 +55,6 @@ class Article:
                            }})
         f.write(text)
         
-        
-
 class Picture:
     '''
     Question 2c

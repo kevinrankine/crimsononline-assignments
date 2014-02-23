@@ -10,6 +10,7 @@ def swapchars(s):
     if len(o) < 1:
         return s
     lowest = o[0]
+    print lowest
     highest = o[len(o) - 1]
     for i in range(len(s)):
         if s[i] == lowest:
