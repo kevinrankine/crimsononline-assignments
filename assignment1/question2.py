@@ -1,10 +1,6 @@
 import json
 import Image
 
-class Callable:
-    def __init__(self, c):
-        self.__call__ = c
-
 class Article:
     '''
     Question 2a
@@ -19,7 +15,6 @@ class Article:
     Question 2b
         Methods:
             - Load article from text file
-    I used http://code.activestate.com/recipes/52304-static-methods-aka-class-methods-in-python/ for this
     Question 2d
         Properties:
             - related_image
@@ -33,26 +28,31 @@ class Article:
         self.content = content
         self.creator = creator
         self.related_image = related_image
-    
+
+    @staticmethod
     def fromFile(filename):
         rep = open(filename, 'r')
         rep = json.load(rep)
-        return Article(rep["headline"], rep["content"], rep["creator"], rep["related_image"])
-
-    fromFile = Callable(fromFile)
+        return Article(rep["headline"], 
+                       rep["content"],
+                       rep["creator"],
+                       Picture(rep["related_image"]["path"],
+                               rep["related_image"]["creator"]))
         
     def show(self):
         print self.headline + "\n"
         print "By: " + self.creator + "\n"
-        print self.content
-        
-    
+        print self.content + "\n"
+
     def save(self, filename):
         f = open(filename, 'w')
         text = json.dumps({"headline" : self.headline, 
                            "creator" : self.creator,
                            "content" : self.content,
-                           "related_image" : self.related_image})
+                           "related_image" : {
+                               "path" : self.related_image.path,
+                               "creator" : self.related_image.creator
+                           }})
         f.write(text)
         
         
