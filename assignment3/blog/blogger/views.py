@@ -22,7 +22,8 @@ def blog_post(request, post_id):
 # Returns a webpage showing a list of all BlogPosts in the database
 def all_posts(request):
     # Find all blog posts
-    data = {'posts': BlogPost.objects.all()}
+    posts = BlogPost.objects.all()
+    data = {'posts': posts}
     print BlogPost.objects.all()
     return render(request, 'all_blog_posts.html', data)
 
@@ -88,3 +89,32 @@ def all_authors(request):
     # Find all authors
     data = {'authors': Author.objects.all()}
     return render(request, 'all_authors.html', data)
+
+def create_author(request):
+    data = {}
+    return render(request, 'create_author.html', data)
+
+def save_author(request):
+    success = False
+    message = ""
+    if request.method == 'POST':
+        success = True
+        try:
+            first = request.POST['first'].strip()
+            last = request.POST['last'].strip()
+            gender = request.POST['gender'].strip()
+            a = Author(first = first, last = last, gender = gender)
+            a.full_clean()
+            a.save()
+        except KeyError:
+            message = "Error: Some field left empty."
+            success = False
+        except ValidationError:
+            message = "Error: Form set invalid information"
+            success = False
+    data = {
+        'success': success,
+        'message': message
+    }
+    
+    return render(request, 'author_creation_response.html', data)

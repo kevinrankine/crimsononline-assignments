@@ -4,7 +4,7 @@
     <ul>
         {% for author in authors %}
             <li>
-                <p><a href="{{ author.get_absolute_url }}">{{ author }}</a></p>
+                <p><a href="{{ author.get_absolute_url }}">{{author.get_honorific}}{{author}}</a></p>
             </li>
         {% endfor %}
     </ul>

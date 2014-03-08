@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if success %}
+<p>Author created!</p>
+    {% else %}
+    <p>{{ message }}</p>
+    {% endif %}
+    <a href="/authors/create/">Add another author</a>
+{% endblock %}

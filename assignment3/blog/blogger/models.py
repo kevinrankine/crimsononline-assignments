@@ -4,12 +4,19 @@ from django.db import models
 class Author(models.Model):
     first = models.CharField(max_length=128, blank=False, null=False)
     last = models.CharField(max_length=128, blank=False, null=False)
+    gender = models.CharField(max_length=1, blank=False, null=False)
 
     def get_absolute_url(self):
         return '/authors/' + str(self.id)
-
+        
     def give_backwards_name(self):
         return self.last + ' ' + self.first
+
+    def get_honorific(self):
+        if self.gender == 'F':
+            return "Ms. "
+        else:
+            return "Mr. "
 
     # String representation of author
     def __unicode__(self):
@@ -25,6 +32,9 @@ class BlogPost(models.Model):
 
     def get_absolute_url(self):
         return '/posts/' + str(self.id)
+
+    def get_blurb(self):
+        return self.post[:100]
 
     # String representation of author
     def __unicode__(self):

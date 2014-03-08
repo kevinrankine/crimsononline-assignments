@@ -28,5 +28,9 @@ urlpatterns = patterns('blogger.views',
 
     # View all posts by one author
     url(r'^authors/(?P<author_id>\d*)/$', 'author'),
+
+    url(r'^authors/create/$', 'create_author'),
+    
+    url(r'^authors/create/submit/$', 'save_author'),
     
 )

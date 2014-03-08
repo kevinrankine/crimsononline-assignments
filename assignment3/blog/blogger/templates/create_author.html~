@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="/authors/create/submit" method="POST">
+  {{ csrf_token }}
+  <label>First Name</label>
+  <input type="text" name="first">
+  <br>
+  <label>Last Name</label>
+  <input type="text" name="last">
+  <br>
+  <label>Gender</label>
+  <select name="gender">
+    <option value="M">Male</option>
+    <option value="F">Female</option>
+  </select>
+  <br>
+  <input type="submit" value="Save author">
+</form>
+{% endblock %}
