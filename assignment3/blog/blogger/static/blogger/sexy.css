@@ -1,0 +1,7 @@
+body {
+    background-image: url("/static/blogger/beauty.jpg");
+}
+
+input[type="text"] {
+    background-color : white;
+}
